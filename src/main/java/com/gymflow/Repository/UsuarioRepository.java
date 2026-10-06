@@ -1,4 +1,4 @@
-package com.gymflow.Repository;
+package com.gymflow.repository;
 
 import com.gymflow.models.Rol;
 import com.gymflow.models.Usuario;

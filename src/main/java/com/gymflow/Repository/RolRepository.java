@@ -1,10 +1,10 @@
-package com.gymflow.Repository;
+package com.gymflow.repository;
 
 import com.gymflow.models.Rol;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface RolRepository extends JpaRepository<Rol, Integer> {
-    Optional<Rol> findByRolName(String rolName);
+    Optional<Rol> findByName(String Name);
 
 }

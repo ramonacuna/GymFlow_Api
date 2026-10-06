@@ -1,5 +1,6 @@
 package com.gymflow.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +14,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Table(name = "socios")
 public class Socio {
     @Id
@@ -30,11 +30,18 @@ public class Socio {
 
     @OneToOne
     @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false, unique = true)
-    private Usuario usuarioId;
+    private Usuario usuario;
 
     @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("socio")
     private List<Membresia> membresias;
 
+    // Métodos de compatibilidad con código anterior que usaba usuarioId
+    public Usuario getUsuarioId() {
+        return usuario;
+    }
 
-
+    public void setUsuarioId(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

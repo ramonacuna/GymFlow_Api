@@ -1,4 +1,4 @@
-package com.gymflow.Repository;
+package com.gymflow.repository;
 
 import com.gymflow.models.Plan;
 import org.springframework.data.jpa.repository.JpaRepository;

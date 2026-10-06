@@ -1,5 +1,6 @@
 package com.gymflow.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +10,8 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 @Table(name = "membresias")
 public class Membresia {
     @Id
@@ -27,12 +29,19 @@ public class Membresia {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "socio_id", nullable = false)
-    private Socio socioId;
+    @JsonIgnoreProperties("membresias")
+    private Socio socio;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "plan_id", nullable = false)
     private Plan plan;
 
+    // Métodos de compatibilidad con código anterior que usaba socioId
+    public Socio getSocioId() {
+        return socio;
+    }
 
-
+    public void setSocioId(Socio socio) {
+        this.socio = socio;
+    }
 }
