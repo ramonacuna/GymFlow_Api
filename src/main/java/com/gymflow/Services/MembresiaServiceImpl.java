@@ -1,10 +1,13 @@
-package com.gymflow.Services;
+package com.gymflow.services;
 
-import com.gymflow.Repository.MembresiaRepository;
+import com.gymflow.repository.MembresiaRepository;
 import com.gymflow.models.Membresia;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
+@Service
 public class MembresiaServiceImpl implements MembresiaService {
     private final MembresiaRepository membresiaRepository;
 
@@ -14,16 +17,36 @@ public class MembresiaServiceImpl implements MembresiaService {
 
     @Override
     public List<Membresia> findAll() {
-        return List.of();
+        return membresiaRepository.findAll();
     }
 
     @Override
-    public Membresia findBySocioIdAndEstado(Integer socioId, Integer estado) {
-        return null;
+    public Optional<Membresia> findById(Integer id) {
+        return membresiaRepository.findById(id);
+    }
+
+    @Override
+    public Membresia save(Membresia membresia) {
+        return membresiaRepository.save(membresia);
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        membresiaRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Membresia> findBySocioId(Integer socioId) {
+        return membresiaRepository.findBySocio_Id(socioId);
+    }
+
+    @Override
+    public Optional<Membresia> findBySocioIdAndEstado(Integer socioId, String estado) {
+        return membresiaRepository.findBySocio_IdAndEstado(socioId, estado);
     }
 
     @Override
     public List<Membresia> findByEstado(String estado) {
-        return List.of();
+        return membresiaRepository.findByEstado(estado);
     }
 }
